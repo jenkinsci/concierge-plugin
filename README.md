@@ -4,8 +4,8 @@
 [![CVE scan](https://github.com/jenkinsci/concierge-plugin/actions/workflows/cve-scan.yml/badge.svg)](https://github.com/jenkinsci/concierge-plugin/actions/workflows/cve-scan.yml)
 [![Licence](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-**Onboarding and an AI assistant for Jenkins that know your instance, and show every person only
-what they are already allowed to see.**
+**Guided onboarding and an AI assistant trained on your Jenkins environment, securely scoped to each
+user's current permissions.**
 
 ![The Concierge welcome page for a developer on the payments team. A welcome message from the team;
 "At a glance" with a bar of the jobs she can see by status, a ring for busy executors and one for
