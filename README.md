@@ -4,8 +4,8 @@
 [![CVE scan](https://github.com/jenkinsci/concierge-plugin/actions/workflows/cve-scan.yml/badge.svg)](https://github.com/jenkinsci/concierge-plugin/actions/workflows/cve-scan.yml)
 [![Licence](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-**Onboarding and an AI assistant for Jenkins that know your instance, and show every person only
-what they are already allowed to see.**
+**Guided onboarding and an AI assistant trained on your Jenkins environment, securely scoped to each
+user's current permissions.**
 
 ![The Concierge welcome page for a developer on the payments team. A welcome message from the team;
 "At a glance" with a bar of the jobs she can see by status, a ring for busy executors and one for
@@ -17,10 +17,14 @@ on it is computed from what she can read, so the platform team's jobs are simply
 
 ### See it in action
 
-https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b
+[![The demo at three times speed, with captions: the welcome page as alice, a guided tour, a
+learning path being completed, the assistant answering why a build failed, and the assistant
+proposing a run of payments/release-train that starts only when alice clicks Run
+it.](docs/images/demo-preview.gif)](https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b)
 
-*Two minutes with English captions: the welcome page, a guided tour, a learning path, and the
-assistant answering a question and proposing a build. To try the same thing yourself, see
+*Played here at three times speed. [Watch the full demo](https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b):
+two minutes with English captions, covering the welcome page, a guided tour, a learning path, and
+the assistant answering a question and proposing a build. To try the same thing yourself, see
 [Trying it locally](docs/demo.md).*
 
 ---
