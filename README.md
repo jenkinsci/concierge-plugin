@@ -17,7 +17,7 @@ on it is computed from what she can read, so the platform team's jobs are simply
 
 ### See it in action
 
-<!-- VIDEO: replace this line with the video's https://github.com/user-attachments/assets/... URL -->
+https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b
 
 *Two minutes with English captions: the welcome page, a guided tour, a learning path, and the
 assistant answering a question and proposing a build. To try the same thing yourself, see
