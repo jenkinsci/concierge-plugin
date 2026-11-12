@@ -188,6 +188,7 @@ that look like JSON into objects.
 | [Security design](docs/security-design.md) | The rules every change follows, and the risk each one addresses |
 | [Building](docs/building.md) | Building, running and installing from source |
 | [Contributing](docs/CONTRIBUTING.md) | Issues, pull requests and house rules |
+| [Releasing](docs/releasing.md) | How continuous delivery works here, which labels ship a change, and why versions are not semver |
 | [The bar](docs/quality-bar.md) | All tests passing and zero shipped CVEs, for every pull request |
 
 ---

@@ -15,7 +15,7 @@
 - [ ] Follows docs/security-design.md: runs as the user, nothing secret sent to a model, no action without confirmation
 - [ ] No inline JavaScript in Jelly, and no `innerHTML` with job, tour or model text
 - [ ] Docs updated if a setting was added, removed or renamed
-- [ ] **Labelled**
+- [ ] **Labelled.** The label decides the changelog section *and* whether this ships at all — see [docs/releasing.md](../docs/releasing.md)
 
 ## How it was checked
 
