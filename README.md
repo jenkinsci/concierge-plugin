@@ -17,10 +17,14 @@ on it is computed from what she can read, so the platform team's jobs are simply
 
 ### See it in action
 
-https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b
+[![The demo at three times speed, with captions: the welcome page as alice, a guided tour, a
+learning path being completed, the assistant answering why a build failed, and the assistant
+proposing a run of payments/release-train that starts only when alice clicks Run
+it.](docs/images/demo-preview.gif)](https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b)
 
-*Two minutes with English captions: the welcome page, a guided tour, a learning path, and the
-assistant answering a question and proposing a build. To try the same thing yourself, see
+*Played here at three times speed. [Watch the full demo](https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b):
+two minutes with English captions, covering the welcome page, a guided tour, a learning path, and
+the assistant answering a question and proposing a build. To try the same thing yourself, see
 [Trying it locally](docs/demo.md).*
 
 ---
