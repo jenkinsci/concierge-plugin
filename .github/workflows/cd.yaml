@@ -1,7 +1,10 @@
 # Releases this plugin: every successful build on ci.jenkins.io of a merge with a pull request
-# labelled for the changelog publishes a new version. It does nothing until the repository is
-# hosted in jenkinsci and CD is enabled in its permissions file, which provides MAVEN_USERNAME and
-# MAVEN_TOKEN. Background: https://www.jenkins.io/redirect/continuous-delivery-of-plugins
+# labelled for the changelog publishes a new version. docs/releasing.md explains which labels ship a
+# change, why versions are generated rather than semver, and how to cut a release by hand.
+#
+# The permissions file carries cd: enabled: true, which provisions MAVEN_USERNAME and MAVEN_TOKEN,
+# and ci.jenkins.io produces the `Jenkins` check the release gates on. GitHub Actions must also be
+# enabled on the repository. Background: https://www.jenkins.io/redirect/continuous-delivery-of-plugins
 ---
 name: cd
 on:
