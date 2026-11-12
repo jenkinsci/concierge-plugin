@@ -7,13 +7,21 @@
 **Onboarding and an AI assistant for Jenkins that know your instance, and show every person only
 what they are already allowed to see.**
 
-![The Concierge welcome page for a developer on the payments team. A welcome message from the team,
-eight tiles counting the jobs she can see by status, what is building and the agents, a "Start
-here" list of three pinned jobs with a note on each, and three guided tours. The Concierge bell sits
-in the bottom-right corner.](docs/images/welcome.png)
+![The Concierge welcome page for a developer on the payments team. A welcome message from the team;
+"At a glance" with a bar of the jobs she can see by status, a ring for busy executors and one for
+agents online; a "Start here" list of pinned jobs with a note on each; and numbered guided tours.
+The Concierge bell sits in the bottom-right corner.](docs/images/welcome.png)
 
 *The welcome page as alice, a developer on the payments team, sees it. Every number, job and tour
 on it is computed from what she can read, so the platform team's jobs are simply not there.*
+
+### See it in action
+
+https://github.com/user-attachments/assets/cbaad27e-7fef-4fc8-a8c7-fad96245c51b
+
+*Two minutes with English captions: the welcome page, a guided tour, a learning path, and the
+assistant answering a question and proposing a build. To try the same thing yourself, see
+[Trying it locally](docs/demo.md).*
 
 ---
 
@@ -30,7 +38,8 @@ Concierge answers from the instance itself, and makes three promises.
 The welcome page, the tours, the learning paths and the assistant are all computed for the person
 looking, from their own permissions. A job they cannot read is not listed, not counted, not
 toured and not mentioned by the assistant. One setup serves the whole controller, from the
-newcomer with access to one folder to the administrator.
+newcomer with access to one folder to the administrator. The permissions involved are in
+[docs/usage.md](docs/usage.md#permissions).
 
 ### Newcomers learn on the real thing
 
@@ -40,12 +49,13 @@ Jenkins, developers and DevOps engineers use this instance's jobs as their examp
 pages a person cannot open. A team lead can pin the jobs that matter, with a note on each, without
 being an administrator.
 
-![A guided tour on a real job page. The build history is outlined and the rest of the page dimmed;
-a card reads "Step 3 of 6: Build history. Every build of this job, newest first. Click one to open
-it." with Leave tour, Back and Next.](docs/images/tour.png)
+![A guided tour on a real job page, automation/cache-warm-identity. The build history is outlined and
+the rest of the page dimmed; a card reads "Step 3 of 6: Build history. Every build of this job,
+newest first. Click one to open it." with Leave tour, Back and Next.](docs/images/tour.png)
 
-*A tour step on a real job. If a later Jenkins changes the page so the highlighted part is gone,
-the step is shown in the middle of the screen instead of being skipped.*
+*A tour step on a real job. Tours follow both the classic Jenkins pages and the newer layout under
+Experiments, and skip a step whose part a page does not have, such as the job list on a dashboard
+made with another kind of view. More in [docs/usage.md](docs/usage.md#tours).*
 
 ### The assistant looks things up, and asks before it acts
 
@@ -54,26 +64,32 @@ log, the job's history. It uses read-only tools that run as you, so it can never
 can. Logs are stripped of secrets before they leave the controller, and an administrator decides
 what kinds of data may be shared at all.
 
-![The Concierge chat window floating over a failing job. Under a "Today" divider, the question "Why
-did the last build fail?" sits on the right with its time. Concierge answers with its own time:
-payments/web-deploy #1 finished with FAILURE, and the console log stops at "ERROR: connection
-refused (staging.payments.internal:8443)", quoted in a code block with a copy
+![The Concierge chat window floating over the failing payments/web-deploy job. alice asks "Why did
+the last build fail?". Concierge answers that payments/web-deploy #1, shown as a link, failed
+because the deploy step could not connect to the staging server, and quotes the end of the log,
+"ERROR: connection refused (staging.payments.internal:8443)", in a code block with a copy
 button.](docs/images/assistant.png)
 
 *The chat floats over every page and knows which page you are on. Drag its corner to resize it,
-or expand it. Every answer says which tools it used.*
+or expand it. Every answer says which tools it used, and job names in it link to the job.*
+
+The assistant is off until an administrator sets it up: an API key stored as a credential, a
+provider and model, and the Concierge/Assistant permission for the people who may use it.
+[Setting up the assistant](docs/usage.md#setting-up-the-assistant) walks through it, including
+proxies and Configuration as Code.
 
 When it is allowed to, the assistant can also propose running a job. It never starts anything
 itself: a card shows the job and every parameter value, and nothing runs until you click
 **Run it**. Everything is checked again at that moment, and the build is started as you.
 
-![The assistant has proposed running payments/release-train again. A card asks "Run
-payments/release-train again (like #3)?" and lists all seven parameters, VERSION, ENVIRONMENT,
-REGION, CANARY_PERCENT, RUN_SMOKE_TESTS, RELEASE_NOTES and DEPLOY_TOKEN shown as hidden, with Run
-it and Cancel.](docs/images/build-proposal.png)
+![The assistant has proposed a build of payments/release-train. A card asks "Start a build of
+payments/release-train?" and lists all seven parameters, VERSION 2.15.0, ENVIRONMENT production,
+REGION, CANARY_PERCENT, RUN_SMOKE_TESTS true, RELEASE_NOTES and DEPLOY_TOKEN shown as default and
+hidden, with Run it and Cancel. Below it, the tools it looked at.](docs/images/build-proposal.png)
 
 *The card is built from the stored proposal, never from the model's text. Password parameters can
-never be set by the assistant, and re-runs never copy secret values.*
+never be set by the assistant, and re-runs never copy secret values. See
+[Starting builds from the assistant](docs/usage.md#starting-builds-from-the-assistant).*
 
 ---
 
@@ -92,6 +108,7 @@ To try it without touching your own controller:
 
 ```bash
 ./scripts/demo.sh --anthropic      # or --openai --model M, --ollama MODEL, or nothing for no AI
+./scripts/demo.sh --mode turbo --anthropic --n-jobs 100   # more plugins and a busier instance
 ```
 
 That builds the plugin and starts a throwaway, secured Jenkins on <http://localhost:8080/concierge/>
@@ -105,10 +122,10 @@ source.
 
 | | |
 | --- | --- |
-| **Welcome page** | Job health, what is building and queued, agents and executors, top-level folders, and plugin and update counts for people who may see them |
+| **Welcome page** | Job health as a chart, busy executors and agents online, what is building and queued, top-level folders, and plugin and update counts for people who may see them |
 | **Start here** | Up to 12 pinned jobs with a note on each, curated by anyone with the Concierge/ManageTours permission |
 | **Guided tours** | Start here, the dashboard, and a job with its build history, last build and console |
-| **Learning paths** | New to Jenkins, Developer and DevOps, with progress saved per person |
+| **Learning paths** | New to Jenkins, Developer and DevOps, with progress saved per person and a badge once a path is done |
 | **Assistant** | A floating, resizable chat on every page and a full-page view, answering from jobs, builds, test results, the queue, agents and plugins |
 | **Providers** | Anthropic, OpenAI, xAI Grok, DeepSeek (only once explicitly allowed), or a local model such as Ollama, optionally through an AI gateway |
 | **Builds from the chat** | Proposed by the assistant, confirmed by the person, limited to jobs an administrator lists |
@@ -128,7 +145,9 @@ id.](docs/images/settings.png)
 *Plain-HTTP base URLs get a warning unless the model runs on the same machine. A custom model id
 overrides the list, for gateways and fine-tuned models.*
 
-Every setting is documented in **[docs/usage.md](docs/usage.md)**.
+Every setting is documented in **[docs/usage.md](docs/usage.md#settings)**, and
+[Setting up the assistant](docs/usage.md#setting-up-the-assistant) covers the credential, the
+permission, proxies and Configuration as Code.
 
 ---
 
